@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:skefra_task_diary/injection.dart';
 import 'package:skefra_task_diary/theme_generator.dart';
-import 'routes/router.gr.dart' as app_route;
+import 'presentation/routes/router.gr.dart' as app_route;
 
 final GlobalKey<ScaffoldMessengerState> kScaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
