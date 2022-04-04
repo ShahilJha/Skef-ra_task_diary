@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:skefra_task_diary/injection.dart';
 import 'package:skefra_task_diary/theme_generator.dart';
 import 'routes/router.gr.dart' as app_route;
 
@@ -13,6 +15,7 @@ final GlobalKey<NavigatorState> kNavigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  configu9reInjection(Environment.prod);
   runApp(MyApp());
 }
 
