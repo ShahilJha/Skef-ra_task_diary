@@ -861,7 +861,7 @@ class _$SignInFormStateTearOff {
       required bool showErrorMessages,
       required bool isSubmitting,
       required bool obscurePassword,
-      required dynamic authFailureOrSuccessOption}) {
+      required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption}) {
     return _SignInFormState(
       emailAddress: emailAddress,
       password: password,
@@ -883,7 +883,8 @@ mixin _$SignInFormState {
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get obscurePassword => throw _privateConstructorUsedError;
-  dynamic get authFailureOrSuccessOption => throw _privateConstructorUsedError;
+  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInFormStateCopyWith<SignInFormState> get copyWith =>
@@ -901,7 +902,7 @@ abstract class $SignInFormStateCopyWith<$Res> {
       bool showErrorMessages,
       bool isSubmitting,
       bool obscurePassword,
-      dynamic authFailureOrSuccessOption});
+      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -946,7 +947,7 @@ class _$SignInFormStateCopyWithImpl<$Res>
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Option<Either<AuthFailure, Unit>>,
     ));
   }
 }
@@ -964,7 +965,7 @@ abstract class _$SignInFormStateCopyWith<$Res>
       bool showErrorMessages,
       bool isSubmitting,
       bool obscurePassword,
-      dynamic authFailureOrSuccessOption});
+      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1010,7 +1011,8 @@ class __$SignInFormStateCopyWithImpl<$Res>
               as bool,
       authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
           ? _value.authFailureOrSuccessOption
-          : authFailureOrSuccessOption,
+          : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AuthFailure, Unit>>,
     ));
   }
 }
@@ -1037,7 +1039,7 @@ class _$_SignInFormState implements _SignInFormState {
   @override
   final bool obscurePassword;
   @override
-  final dynamic authFailureOrSuccessOption;
+  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -1085,7 +1087,8 @@ abstract class _SignInFormState implements SignInFormState {
       required bool showErrorMessages,
       required bool isSubmitting,
       required bool obscurePassword,
-      required dynamic authFailureOrSuccessOption}) = _$_SignInFormState;
+      required Option<Either<AuthFailure, Unit>>
+          authFailureOrSuccessOption}) = _$_SignInFormState;
 
   @override
   EmailAddress get emailAddress;
@@ -1098,7 +1101,7 @@ abstract class _SignInFormState implements SignInFormState {
   @override
   bool get obscurePassword;
   @override
-  dynamic get authFailureOrSuccessOption;
+  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$SignInFormStateCopyWith<_SignInFormState> get copyWith =>
