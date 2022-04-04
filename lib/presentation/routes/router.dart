@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:skefra_task_diary/main.dart';
+
+import '../pages/home/home_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',

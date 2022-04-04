@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants/global_constants.dart';
+import '../../constants/global_constants.dart';
 
 class ThemeGenerator {
   static ThemeData generateThemeData() {
