@@ -77,13 +77,17 @@ class AppTextField extends StatelessWidget {
               labelText: labelText ?? 'Email',
               hintText: hintText ?? 'abc@email.com',
               prefixIcon: const Icon(Icons.mail),
-              suffixIcon: controller!.text.isEmpty
-                  ? Container(width: 0)
-                  : IconButton(
+              suffixIcon: controller == null
+                  ? IconButton(
                       icon: const Icon(Icons.close),
-                      onPressed:
-                          onSuffixIconPressed ?? () => controller!.clear(),
-                    ),
+                      onPressed: onSuffixIconPressed,
+                    )
+                  : controller!.text.isEmpty
+                      ? Container(width: 0)
+                      : IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () => controller!.clear(),
+                        ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
               ),
