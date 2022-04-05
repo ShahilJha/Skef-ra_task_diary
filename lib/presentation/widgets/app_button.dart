@@ -7,6 +7,7 @@ class AppButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final AlignmentGeometry? alignment;
+  final Color? color;
   const AppButton({
     Key? key,
     required this.name,
@@ -14,6 +15,7 @@ class AppButton extends StatelessWidget {
     this.padding,
     this.margin,
     this.alignment,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class AppButton extends StatelessWidget {
       child: ElevatedButton(
         child: Text(name),
         style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).primaryColor,
+          primary: color ?? Theme.of(context).primaryColor,
           elevation: 5.0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

@@ -61,7 +61,7 @@ class AppTextField extends StatelessWidget {
         ],
       ).value!,
     );
-    const _margin = EdgeInsets.symmetric(vertical: 25);
+    const _margin = EdgeInsets.symmetric(vertical: 15);
     switch (textFieldType) {
       case TextFieldType.email:
         return Container(
