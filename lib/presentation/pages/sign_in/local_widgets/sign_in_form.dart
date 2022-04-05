@@ -21,7 +21,16 @@ class SignInForm extends StatelessWidget {
                 child: Form(
                   child: ListView(
                     children: [
-                      AppTextField(),
+                      AppTextField(
+                        textFieldType: TextFieldType.email,
+                        labelText: 'Email',
+                        icon: Icons.mail,
+                      ),
+                      AppTextField(
+                        textFieldType: TextFieldType.password,
+                        labelText: 'Password',
+                        icon: Icons.vpn_key,
+                      ),
                     ],
                   ),
                 ),

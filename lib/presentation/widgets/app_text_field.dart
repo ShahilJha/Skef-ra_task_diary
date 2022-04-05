@@ -21,8 +21,9 @@ class AppTextField extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final TextFieldType textFieldType;
-  final bool? obscurePassword;
+  final bool obscurePassword;
   final VoidCallback? onSuffixIconPressed;
+  final Function(String)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
@@ -37,10 +38,11 @@ class AppTextField extends StatelessWidget {
     this.margin,
     this.padding,
     this.textFieldType = TextFieldType.normal,
-    this.obscurePassword,
+    this.obscurePassword = true,
     this.onSuffixIconPressed,
     this.inputFormatters,
     this.labelText,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -86,6 +88,7 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
+            onChanged: onChanged,
           ),
         );
 
@@ -99,13 +102,13 @@ class AppTextField extends StatelessWidget {
             textInputAction: TextInputAction.done,
             validator: validator,
             textAlign: TextAlign.center,
-            obscureText: obscurePassword!,
+            obscureText: obscurePassword,
             decoration: InputDecoration(
               labelText: labelText ?? 'Password',
               hintText: hintText ?? 'pAssWord1@',
               prefixIcon: const Icon(Icons.vpn_key),
               suffixIcon: IconButton(
-                icon: obscurePassword!
+                icon: obscurePassword
                     ? const Icon(Icons.visibility_off)
                     : const Icon(Icons.visibility),
                 onPressed: onSuffixIconPressed,
@@ -117,6 +120,7 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
+            onChanged: onChanged,
           ),
         );
 
@@ -146,6 +150,7 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
               ),
             ),
+            onChanged: onChanged,
           ),
         );
 
@@ -175,6 +180,7 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
               ),
             ),
+            onChanged: onChanged,
           ),
         );
     }
