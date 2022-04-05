@@ -15,6 +15,7 @@ class AppTextField extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final IconData? icon;
+  final IconData? suffixIcon;
   final bool? autoFocus;
   final bool? autoCorrect;
   final int? maxLines;
@@ -45,6 +46,7 @@ class AppTextField extends StatelessWidget {
     this.labelText,
     this.onChanged,
     this.autoCorrect,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -153,6 +155,12 @@ class AppTextField extends StatelessWidget {
               alignLabelWithHint: true,
               hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic),
               prefixIcon: icon != null ? Icon(icon) : null,
+              suffixIcon: suffixIcon == null
+                  ? null
+                  : IconButton(
+                      icon: Icon(suffixIcon),
+                      onPressed: onSuffixIconPressed,
+                    ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
               ),
@@ -184,6 +192,12 @@ class AppTextField extends StatelessWidget {
               alignLabelWithHint: true,
               hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic),
               prefixIcon: icon != null ? Icon(icon) : null,
+              suffixIcon: suffixIcon == null
+                  ? null
+                  : IconButton(
+                      icon: Icon(suffixIcon),
+                      onPressed: onSuffixIconPressed,
+                    ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
               ),
