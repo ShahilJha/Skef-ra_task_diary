@@ -3,7 +3,7 @@ import '../../constants/global_constants.dart';
 
 class ThemeGenerator {
   static ThemeData generateThemeData() {
-    return ThemeData(
+    return ThemeData.light().copyWith(
       primaryColor: kPrimaryColor,
       scaffoldBackgroundColor: kScaffoldBackgroundColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,

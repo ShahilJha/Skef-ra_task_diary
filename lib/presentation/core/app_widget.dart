@@ -24,7 +24,7 @@ class AppWidget extends StatelessWidget {
       scaffoldMessengerKey: kScaffoldMessengerKey,
       routerDelegate: AutoRouterDelegate(router),
       routeInformationParser: router.defaultRouteParser(),
-      title: 'Skef-Ra Novel Bookmarks',
+      title: 'Skef-Ra Task Diary',
       debugShowCheckedModeBanner: false,
       theme: ThemeGenerator.generateThemeData(),
       builder: (context, widget) => ResponsiveWrapper.builder(
