@@ -16,6 +16,7 @@ class AppTextField extends StatelessWidget {
   final String? labelText;
   final IconData? icon;
   final bool? autoFocus;
+  final bool? autoCorrect;
   final int? maxLines;
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? margin;
@@ -43,6 +44,7 @@ class AppTextField extends StatelessWidget {
     this.inputFormatters,
     this.labelText,
     this.onChanged,
+    this.autoCorrect,
   }) : super(key: key);
 
   @override
@@ -64,7 +66,8 @@ class AppTextField extends StatelessWidget {
           padding: padding ?? _padding,
           margin: margin ?? _margin,
           child: TextFormField(
-            autofocus: true,
+            autofocus: autoFocus ?? false,
+            autocorrect: false,
             controller: controller,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
@@ -97,16 +100,18 @@ class AppTextField extends StatelessWidget {
           padding: padding ?? _padding,
           margin: margin ?? _margin,
           child: TextFormField(
+            autofocus: autoFocus ?? false,
             controller: controller,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             validator: validator,
+            autocorrect: false,
             textAlign: TextAlign.center,
             obscureText: obscurePassword,
             decoration: InputDecoration(
               labelText: labelText ?? 'Password',
               hintText: hintText ?? 'pAssWord1@',
-              prefixIcon: const Icon(Icons.vpn_key),
+              prefixIcon: const Icon(Icons.lock),
               suffixIcon: IconButton(
                 icon: obscurePassword
                     ? const Icon(Icons.visibility_off)
@@ -135,6 +140,7 @@ class AppTextField extends StatelessWidget {
             keyboardType: keyboardType ?? TextInputType.number,
             textInputAction: TextInputAction.done,
             validator: validator,
+            autocorrect: false,
             textAlign: TextAlign.center,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             decoration: InputDecoration(
@@ -160,6 +166,7 @@ class AppTextField extends StatelessWidget {
           margin: margin ?? _margin,
           child: TextFormField(
             autofocus: autoFocus ?? false,
+            autocorrect: autoCorrect ?? true,
             maxLines: maxLines,
             controller: controller,
             keyboardType: keyboardType ?? TextInputType.text,
