@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:skefra_task_diary/presentation/pages/sign_in/sign_in_page.dart';
 
 import '../pages/home/home_page.dart';
 
@@ -6,7 +7,7 @@ import '../pages/home/home_page.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(path: '/', page: HomePage, initial: true),
-    // AutoRoute(path: '/home', page: HomePage),
+    AutoRoute(path: '/login', page: SignInPage),
   ],
 )
 class $Router {}
