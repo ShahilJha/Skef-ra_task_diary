@@ -6,12 +6,14 @@ enum TextFieldType {
   email,
   password,
   normal,
+  number,
 }
 
 class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? hintText;
+  final String? labelText;
   final IconData? icon;
   final bool? autoFocus;
   final int? maxLines;
@@ -20,7 +22,7 @@ class AppTextField extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextFieldType textFieldType;
   final bool? obscurePassword;
-  final VoidCallback? togglePassword;
+  final VoidCallback? onSuffixIconPressed;
   final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
@@ -36,25 +38,29 @@ class AppTextField extends StatelessWidget {
     this.padding,
     this.textFieldType = TextFieldType.normal,
     this.obscurePassword,
-    this.togglePassword,
+    this.onSuffixIconPressed,
     this.inputFormatters,
+    this.labelText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _padding = EdgeInsets.symmetric(
+      horizontal: ResponsiveValue(
+        context,
+        defaultValue: 100.0,
+        valueWhen: const [
+          Condition.smallerThan(name: MOBILE, value: 10.0),
+          Condition.smallerThan(name: TABLET, value: 25.0),
+        ],
+      ).value!,
+    );
+    const _margin = EdgeInsets.symmetric(vertical: 25);
     switch (textFieldType) {
       case TextFieldType.email:
         return Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveValue(
-            context,
-            defaultValue: 100.0,
-            valueWhen: const [
-              Condition.smallerThan(name: MOBILE, value: 10.0),
-              Condition.smallerThan(name: TABLET, value: 25.0),
-            ],
-          ).value!),
-          margin: margin ?? const EdgeInsets.symmetric(vertical: 25),
+          padding: padding ?? _padding,
+          margin: margin ?? _margin,
           child: TextFormField(
             autofocus: true,
             controller: controller,
@@ -63,13 +69,15 @@ class AppTextField extends StatelessWidget {
             validator: validator,
             textAlign: TextAlign.center,
             decoration: InputDecoration(
-              hintText: 'Email',
+              labelText: labelText ?? 'Email',
+              hintText: hintText ?? 'abc@email.com',
               prefixIcon: const Icon(Icons.mail),
               suffixIcon: controller!.text.isEmpty
                   ? Container(width: 0)
                   : IconButton(
                       icon: const Icon(Icons.close),
-                      onPressed: () => controller!.clear(),
+                      onPressed:
+                          onSuffixIconPressed ?? () => controller!.clear(),
                     ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
@@ -83,32 +91,24 @@ class AppTextField extends StatelessWidget {
 
       case TextFieldType.password:
         return Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: ResponsiveValue(
-              context,
-              defaultValue: 100.0,
-              valueWhen: const [
-                Condition.smallerThan(name: MOBILE, value: 10.0),
-                Condition.smallerThan(name: TABLET, value: 25.0),
-              ],
-            ).value!,
-          ),
-          margin: const EdgeInsets.symmetric(vertical: 25),
+          padding: padding ?? _padding,
+          margin: margin ?? _margin,
           child: TextFormField(
             controller: controller,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             validator: validator,
             textAlign: TextAlign.center,
             obscureText: obscurePassword!,
             decoration: InputDecoration(
-              hintText: 'Password',
+              labelText: labelText ?? 'Password',
+              hintText: hintText ?? 'pAssWord1@',
               prefixIcon: const Icon(Icons.vpn_key),
               suffixIcon: IconButton(
                 icon: obscurePassword!
                     ? const Icon(Icons.visibility_off)
                     : const Icon(Icons.visibility),
-                onPressed: togglePassword,
+                onPressed: onSuffixIconPressed,
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
@@ -120,21 +120,39 @@ class AppTextField extends StatelessWidget {
           ),
         );
 
+      case TextFieldType.number:
+        return Container(
+          padding: padding ?? _padding,
+          margin: margin ?? _margin,
+          child: TextFormField(
+            autofocus: autoFocus ?? false,
+            maxLines: maxLines,
+            controller: controller,
+            keyboardType: keyboardType ?? TextInputType.number,
+            textInputAction: TextInputAction.done,
+            validator: validator,
+            textAlign: TextAlign.center,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              labelText: labelText ?? 'Numbers',
+              hintText: hintText ?? '123',
+              alignLabelWithHint: true,
+              hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic),
+              prefixIcon: icon != null ? Icon(icon) : null,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+        );
+
       default:
         return Container(
-          padding: padding ??
-              EdgeInsets.symmetric(
-                horizontal: ResponsiveValue(
-                  context,
-                  defaultValue: 100.0,
-                  valueWhen: const [
-                    Condition.smallerThan(name: MOBILE, value: 10.0),
-                    Condition.smallerThan(name: TABLET, value: 25.0),
-                    // Condition.largerThan(name: TABLET, value: 100.0),
-                  ],
-                ).value!,
-              ),
-          margin: margin ?? const EdgeInsets.symmetric(vertical: 25),
+          padding: padding ?? _padding,
+          margin: margin ?? _margin,
           child: TextFormField(
             autofocus: autoFocus ?? false,
             maxLines: maxLines,
@@ -145,6 +163,7 @@ class AppTextField extends StatelessWidget {
             textAlign: TextAlign.center,
             inputFormatters: [...?inputFormatters],
             decoration: InputDecoration(
+              labelText: labelText,
               hintText: hintText,
               alignLabelWithHint: true,
               hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic),
