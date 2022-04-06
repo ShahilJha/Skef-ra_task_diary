@@ -58,35 +58,28 @@ class SignInForm extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           AppButton(
-                              name: 'Sign In',
-                              onPressed: () {
-                                debugPrint('Clicked Signin');
-                                _bloc.add(
-                                  const SignInFormEvent
-                                      .signInWithEmailAndPasswordPressed(),
-                                );
-                              }),
+                            name: 'Sign In',
+                            onPressed: () => _bloc.add(
+                              const SignInFormEvent
+                                  .signInWithEmailAndPasswordPressed(),
+                            ),
+                          ),
                           AppButton(
-                              name: 'Register',
-                              onPressed: () {
-                                debugPrint('Clicked register');
-
-                                _bloc.add(
-                                  const SignInFormEvent
-                                      .registerWithEmailAndPasswordPressed(),
-                                );
-                              }),
+                            name: 'Register',
+                            onPressed: () => _bloc.add(
+                              const SignInFormEvent
+                                  .registerWithEmailAndPasswordPressed(),
+                            ),
+                          ),
                         ],
                       ),
                       AppButton(
-                          name: 'Sign In With Google',
-                          color: Colors.blue.shade400,
-                          onPressed: () {
-                            debugPrint('Clicked with google');
-                            _bloc.add(
-                              const SignInFormEvent.signInWithGooglePressed(),
-                            );
-                          }),
+                        name: 'Sign In With Google',
+                        color: Colors.blue.shade400,
+                        onPressed: () => _bloc.add(
+                          const SignInFormEvent.signInWithGooglePressed(),
+                        ),
+                      ),
                     ],
                   ),
                 ),
