@@ -11,7 +11,39 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final _bloc = context.read<SignInFormBloc>();
     return BlocConsumer<SignInFormBloc, SignInFormState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        state.authFailureOrSuccessOption.fold(
+          () {
+            //none()
+          },
+          //some()
+          (either) => either.fold(
+            //AuthFailure
+            (leftFailure) {
+              // ignore: todo
+              //TODO: Use getIt to get Utilities.showSnackBar
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 2),
+                  content: Text(
+                    leftFailure.map(
+                      cancelledByUser: (_) => 'Cancelled',
+                      serverError: (_) => 'Server Error',
+                      emailALreadyInUse: (_) => 'Email Already in Use',
+                      invalidEmailAndPasswordCombination: (_) =>
+                          'Invalid Email and Password Combination',
+                    ),
+                  ),
+                ),
+              );
+            },
+            //Unit
+            (_) {
+              //Navigation
+            },
+          ),
+        );
+      },
       builder: (context, state) {
         final mediaQuery = MediaQuery.of(context);
         final screenHeight = mediaQuery.size.height * 0.88;
