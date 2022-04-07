@@ -38,7 +38,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     }));
 
     on<TogglePasswordObscurity>(((event, emit) async {
-      emit(state.copyWith(obscurePassword: !state.obscurePassword));
+      emit(state.copyWith(obscurePassword: !event.obscurePassword));
     }));
 
     on<ClearEmailAddress>(((event, emit) async {

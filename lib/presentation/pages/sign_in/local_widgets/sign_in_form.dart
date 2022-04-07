@@ -10,6 +10,7 @@ class SignInForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = context.read<SignInFormBloc>();
+    final TextEditingController _controller = TextEditingController();
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
@@ -61,6 +62,9 @@ class SignInForm extends StatelessWidget {
                     children: [
                       AppTextField(
                         autoFocus: true,
+                        controller: _controller,
+                        onSuffixIconPressed: () => _bloc
+                            .add(const SignInFormEvent.clearEmailAddress()),
                         textFieldType: TextFieldType.email,
                         labelText: 'Email',
                         onChanged: (value) =>
@@ -76,6 +80,12 @@ class SignInForm extends StatelessWidget {
                       AppTextField(
                         textFieldType: TextFieldType.password,
                         labelText: 'Password',
+                        onSuffixIconPressed: () => _bloc.add(
+                          SignInFormEvent.togglePasswordObscurity(
+                            state.obscurePassword,
+                          ),
+                        ),
+                        obscurePassword: state.obscurePassword,
                         onChanged: (value) =>
                             _bloc.add(SignInFormEvent.passwordChanged(value)),
                         validator: (_) => _bloc.state.password.value.fold(

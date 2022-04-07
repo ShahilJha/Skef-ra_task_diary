@@ -79,17 +79,27 @@ class AppTextField extends StatelessWidget {
               labelText: labelText ?? 'Email',
               hintText: hintText ?? 'abc@email.com',
               prefixIcon: const Icon(Icons.mail),
-              suffixIcon: controller == null
+              suffixIcon: controller == null //if controller is not given
                   ? IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: onSuffixIconPressed,
                     )
-                  : controller!.text.isEmpty
+                  : controller!.text
+                          .isEmpty //only if controller is given and textfield is not empty
                       ? Container(width: 0)
-                      : IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () => controller!.clear(),
-                        ),
+                      : onSuffixIconPressed ==
+                              null //if the onSuffixIconPressed function is not given
+                          ? IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () => controller!.clear(),
+                            )
+                          : IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                controller!.clear();
+                                onSuffixIconPressed!();
+                              },
+                            ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100),
               ),

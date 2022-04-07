@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:skefra_task_diary/presentation/routes/router.gr.dart'
-    as app_router;
+// import 'package:skefra_task_diary/presentation/routes/router.gr.dart'
+//     as app_router;
 import '../core/app_widget.dart';
 
 class Utilities {
