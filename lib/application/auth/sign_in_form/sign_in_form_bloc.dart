@@ -37,6 +37,17 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       );
     }));
 
+    on<TogglePasswordObscurity>(((event, emit) async {
+      emit(state.copyWith(obscurePassword: !state.obscurePassword));
+    }));
+
+    on<ClearEmailAddress>(((event, emit) async {
+      emit(state.copyWith(
+        authFailureOrSuccessOption: none(),
+        emailAddress: EmailAddress(''),
+      ));
+    }));
+
     on<RegisterWithEmailAndPasswordPressed>(((event, emit) async {
       // ignore: todo
       //TODO: make implementation DRY
