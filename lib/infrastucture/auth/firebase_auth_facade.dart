@@ -5,6 +5,8 @@ import 'package:skefra_task_diary/domain/auth/auth_value_objects.dart';
 import 'package:skefra_task_diary/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:skefra_task_diary/domain/auth/i_auth_facade.dart';
+import 'package:skefra_task_diary/domain/core/entities/user.dart' as app_user;
+import './firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -12,6 +14,12 @@ class FirebaseAuthFacade implements IAuthFacade {
   final GoogleSignIn _googleSignIn;
 
   FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn);
+
+  @override
+  Future<Option<app_user.User>> getSignedInUser() async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    return optionOf(firebaseUser?.toDomain());
+  }
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
@@ -78,4 +86,10 @@ class FirebaseAuthFacade implements IAuthFacade {
       return left(const AuthFailure.serverError());
     }
   }
+
+  @override
+  Future<void> signOutUser() => Future.wait([
+        _firebaseAuth.signOut(),
+        _googleSignIn.signOut(),
+      ]);
 }
