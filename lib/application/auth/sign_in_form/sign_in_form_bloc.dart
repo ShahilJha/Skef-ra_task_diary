@@ -17,8 +17,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _authFacade;
 
   SignInFormBloc(this._authFacade) : super(SignInFormState.initial()) {
-    on<SignInFormEvent>((event, emit) {});
-
     on<EmailChanged>(((event, emit) async {
       emit(
         state.copyWith(
@@ -38,7 +36,10 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     }));
 
     on<TogglePasswordObscurity>(((event, emit) async {
-      emit(state.copyWith(obscurePassword: !event.obscurePassword));
+      emit(state.copyWith(
+        obscurePassword: !event.obscurePassword,
+        authFailureOrSuccessOption: none(),
+      ));
     }));
 
     on<ClearEmailAddress>(((event, emit) async {
@@ -57,7 +58,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       // );
 
       Either<AuthFailure, Unit>? failureOrSuccess;
-      debugPrint('call RegisterWithEmailAndPasswordPressed');
 
       final isEmailValid = state.emailAddress.isValid();
       final isPasswordValid = state.password.isValid();
@@ -91,7 +91,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       // );
 
       Either<AuthFailure, Unit>? failureOrSuccess;
-      debugPrint('call SignInWithEmailAndPasswordPressed');
 
       final isEmailValid = state.emailAddress.isValid();
       final isPasswordValid = state.password.isValid();
