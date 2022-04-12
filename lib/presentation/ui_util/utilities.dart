@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 // import 'package:skefra_task_diary/presentation/routes/router.gr.dart'
 //     as app_router;
 import '../core/app_widget.dart';
 
+@lazySingleton
 class Utilities {
-  Future showSnackBar(String text) async {
+  Future showSnackBar({required String text}) async {
     return kScaffoldMessengerKey.currentState?.showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 2),
