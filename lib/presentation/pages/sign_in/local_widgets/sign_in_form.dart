@@ -15,6 +15,7 @@ class SignInForm extends StatelessWidget {
     final TextEditingController _controller = TextEditingController();
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
+        //show error in snackbar
         state.authFailureOrSuccessOption.fold(
           () {
             //none()
@@ -39,6 +40,9 @@ class SignInForm extends StatelessWidget {
             },
           ),
         );
+
+        //show in-process circular indicator
+        state.isSubmitting == true ? getIt<Utilities>().showProcessing() : null;
       },
       builder: (context, state) {
         final mediaQuery = MediaQuery.of(context);
