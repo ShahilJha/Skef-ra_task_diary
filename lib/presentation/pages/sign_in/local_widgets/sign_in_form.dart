@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skefra_task_diary/application/auth/sign_in_form/sign_in_form_bloc.dart';
@@ -37,6 +38,7 @@ class SignInForm extends StatelessWidget {
             //Unit
             (_) {
               //Navigation
+              context.navigateNamedTo('/home');
             },
           ),
         );
@@ -69,7 +71,7 @@ class SignInForm extends StatelessWidget {
                         onChanged: (value) =>
                             _bloc.add(SignInFormEvent.emailChanged(value)),
                         validator: (_) => _bloc.state.emailAddress.value.fold(
-                          (leftFailure) => leftFailure.maybeMap(
+                          (leftFailure) => leftFailure.authFailure.maybeMap(
                             invalidEmail: (_) => 'Invalid Email',
                             orElse: () => null,
                           ),
@@ -88,7 +90,7 @@ class SignInForm extends StatelessWidget {
                         onChanged: (value) =>
                             _bloc.add(SignInFormEvent.passwordChanged(value)),
                         validator: (_) => _bloc.state.password.value.fold(
-                          (leftFailure) => leftFailure.maybeMap(
+                          (leftFailure) => leftFailure.authFailure.maybeMap(
                             shortPassword: (_) => 'Invalid Password',
                             orElse: () => null,
                           ),
