@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import '../core/value_failures/value_failures.dart';
 import '../core/value_objects/value_object.dart';
-import '../core/value_validators/auth_value_validators.dart';
+import 'auth_value_validators.dart';
 
 class EmailAddress extends ValueObject<String> {
   // ignore: annotate_overrides

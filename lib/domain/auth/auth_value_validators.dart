@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:skefra_task_diary/domain/auth/auth_value_failures.dart';
-import '../value_failures/value_failures.dart';
+import '../core/value_failures/value_failures.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   // ignore: todo
