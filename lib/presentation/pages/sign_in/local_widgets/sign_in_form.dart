@@ -49,6 +49,7 @@ class SignInForm extends StatelessWidget {
       builder: (context, state) {
         final mediaQuery = MediaQuery.of(context);
         final screenHeight = mediaQuery.size.height * 0.88;
+        var auth;
         return SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
@@ -71,11 +72,16 @@ class SignInForm extends StatelessWidget {
                         onChanged: (value) =>
                             _bloc.add(SignInFormEvent.emailChanged(value)),
                         validator: (_) => _bloc.state.emailAddress.value.fold(
-                          (leftFailure) => leftFailure.authFailure.maybeMap(
-                            invalidEmail: (_) => 'Invalid Email',
+                          //leftFailure
+                          (leftFailure) => leftFailure.maybeMap(
+                            auth: (failure) => failure.authFailure.maybeMap(
+                              invalidEmail: (_) => 'Invalid Email',
+                              orElse: () => null,
+                            ),
                             orElse: () => null,
                           ),
-                          (r) => null,
+                          //rightValue
+                          (_) => null,
                         ),
                       ),
                       AppTextField(
@@ -90,11 +96,16 @@ class SignInForm extends StatelessWidget {
                         onChanged: (value) =>
                             _bloc.add(SignInFormEvent.passwordChanged(value)),
                         validator: (_) => _bloc.state.password.value.fold(
-                          (leftFailure) => leftFailure.authFailure.maybeMap(
-                            shortPassword: (_) => 'Invalid Password',
+                          //leftFailure
+                          (leftFailure) => leftFailure.maybeMap(
+                            auth: (failure) => failure.authFailure.maybeMap(
+                              shortPassword: (_) => 'Invalid Password',
+                              orElse: () => null,
+                            ),
                             orElse: () => null,
                           ),
-                          (r) => null,
+                          //rightValue
+                          (_) => null,
                         ),
                       ),
                       Row(
