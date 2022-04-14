@@ -12,10 +12,14 @@ Either<ValueFailure<String>, String> validateMaxStringLength(
   if (input.length <= maxLength) {
     return right(input);
   } else {
-    return left(ValueFailure.core(CoreValueFaliue.exceedingLength(
-      failedValue: input,
-      max: maxLength,
-    )));
+    return left(
+      ValueFailure.core(
+        CoreValueFaliue.exceedingLength(
+          failedValue: input,
+          max: maxLength,
+        ),
+      ),
+    );
   }
 }
 
@@ -23,7 +27,11 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
   if (input.isNotEmpty) {
     return right(input);
   } else {
-    return left(ValueFailure.core(CoreValueFaliue.empty(failedValue: input)));
+    return left(
+      ValueFailure.core(
+        CoreValueFaliue.empty(failedValue: input),
+      ),
+    );
   }
 }
 
@@ -32,7 +40,10 @@ Either<ValueFailure<String>, String> validateSigleLine(String input) {
     return right(input);
   } else {
     return left(
-        ValueFailure.core(CoreValueFaliue.multiLine(failedValue: input)));
+      ValueFailure.core(
+        CoreValueFaliue.multiLine(failedValue: input),
+      ),
+    );
   }
 }
 
@@ -43,9 +54,13 @@ Either<ValueFailure<KtList<T>>, KtList<T>> validateMaxListLength<T>(
   if (input.size <= maxLength) {
     return right(input);
   } else {
-    return left(ValueFailure.notes(NotesValueFailure.listTooLong(
-      failedValue: input,
-      max: maxLength,
-    )));
+    return left(
+      ValueFailure.notes(
+        NotesValueFailure.listTooLong(
+          failedValue: input,
+          max: maxLength,
+        ),
+      ),
+    );
   }
 }

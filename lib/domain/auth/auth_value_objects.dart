@@ -4,7 +4,7 @@ import '../core/value_objects/value_object.dart';
 import 'auth_value_validators.dart';
 
 class EmailAddress extends ValueObject<String> {
-  // ignore: annotate_overrides
+  @override
   final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String input) =>
@@ -14,7 +14,7 @@ class EmailAddress extends ValueObject<String> {
 }
 
 class Password extends ValueObject<String> {
-  // ignore: annotate_overrides
+  @override
   final Either<ValueFailure<String>, String> value;
 
   factory Password(String input) => Password._(validatePassword(input));
