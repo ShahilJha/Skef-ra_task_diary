@@ -18,6 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ValueFailureTearOff {
   const _$ValueFailureTearOff();
 
+  _Core<T> core<T>(CoreValueFaliue<T> coreFailure) {
+    return _Core<T>(
+      coreFailure,
+    );
+  }
+
   _Auth<T> auth<T>(AuthValueFailure<T> authFailure) {
     return _Auth<T>(
       authFailure,
@@ -38,18 +44,21 @@ const $ValueFailure = _$ValueFailureTearOff();
 mixin _$ValueFailure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(CoreValueFaliue<T> coreFailure) core,
     required TResult Function(AuthValueFailure<T> authFailure) auth,
     required TResult Function(NotesValueFailure<T> notesFailure) notes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
     TResult Function(AuthValueFailure<T> authFailure)? auth,
     TResult Function(NotesValueFailure<T> notesFailure)? notes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
     TResult Function(AuthValueFailure<T> authFailure)? auth,
     TResult Function(NotesValueFailure<T> notesFailure)? notes,
     required TResult orElse(),
@@ -57,18 +66,21 @@ mixin _$ValueFailure<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Core<T> value) core,
     required TResult Function(_Auth<T> value) auth,
     required TResult Function(_Notes<T> value) notes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
     TResult Function(_Auth<T> value)? auth,
     TResult Function(_Notes<T> value)? notes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
     TResult Function(_Auth<T> value)? auth,
     TResult Function(_Notes<T> value)? notes,
     required TResult orElse(),
@@ -91,6 +103,153 @@ class _$ValueFailureCopyWithImpl<T, $Res>
   final ValueFailure<T> _value;
   // ignore: unused_field
   final $Res Function(ValueFailure<T>) _then;
+}
+
+/// @nodoc
+abstract class _$CoreCopyWith<T, $Res> {
+  factory _$CoreCopyWith(_Core<T> value, $Res Function(_Core<T>) then) =
+      __$CoreCopyWithImpl<T, $Res>;
+  $Res call({CoreValueFaliue<T> coreFailure});
+
+  $CoreValueFaliueCopyWith<T, $Res> get coreFailure;
+}
+
+/// @nodoc
+class __$CoreCopyWithImpl<T, $Res> extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements _$CoreCopyWith<T, $Res> {
+  __$CoreCopyWithImpl(_Core<T> _value, $Res Function(_Core<T>) _then)
+      : super(_value, (v) => _then(v as _Core<T>));
+
+  @override
+  _Core<T> get _value => super._value as _Core<T>;
+
+  @override
+  $Res call({
+    Object? coreFailure = freezed,
+  }) {
+    return _then(_Core<T>(
+      coreFailure == freezed
+          ? _value.coreFailure
+          : coreFailure // ignore: cast_nullable_to_non_nullable
+              as CoreValueFaliue<T>,
+    ));
+  }
+
+  @override
+  $CoreValueFaliueCopyWith<T, $Res> get coreFailure {
+    return $CoreValueFaliueCopyWith<T, $Res>(_value.coreFailure, (value) {
+      return _then(_value.copyWith(coreFailure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Core<T> implements _Core<T> {
+  const _$_Core(this.coreFailure);
+
+  @override
+  final CoreValueFaliue<T> coreFailure;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.core(coreFailure: $coreFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Core<T> &&
+            const DeepCollectionEquality()
+                .equals(other.coreFailure, coreFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(coreFailure));
+
+  @JsonKey(ignore: true)
+  @override
+  _$CoreCopyWith<T, _Core<T>> get copyWith =>
+      __$CoreCopyWithImpl<T, _Core<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CoreValueFaliue<T> coreFailure) core,
+    required TResult Function(AuthValueFailure<T> authFailure) auth,
+    required TResult Function(NotesValueFailure<T> notesFailure) notes,
+  }) {
+    return core(coreFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
+    TResult Function(AuthValueFailure<T> authFailure)? auth,
+    TResult Function(NotesValueFailure<T> notesFailure)? notes,
+  }) {
+    return core?.call(coreFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
+    TResult Function(AuthValueFailure<T> authFailure)? auth,
+    TResult Function(NotesValueFailure<T> notesFailure)? notes,
+    required TResult orElse(),
+  }) {
+    if (core != null) {
+      return core(coreFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Core<T> value) core,
+    required TResult Function(_Auth<T> value) auth,
+    required TResult Function(_Notes<T> value) notes,
+  }) {
+    return core(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
+    TResult Function(_Auth<T> value)? auth,
+    TResult Function(_Notes<T> value)? notes,
+  }) {
+    return core?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
+    TResult Function(_Auth<T> value)? auth,
+    TResult Function(_Notes<T> value)? notes,
+    required TResult orElse(),
+  }) {
+    if (core != null) {
+      return core(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Core<T> implements ValueFailure<T> {
+  const factory _Core(CoreValueFaliue<T> coreFailure) = _$_Core<T>;
+
+  CoreValueFaliue<T> get coreFailure;
+  @JsonKey(ignore: true)
+  _$CoreCopyWith<T, _Core<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -165,6 +324,7 @@ class _$_Auth<T> implements _Auth<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(CoreValueFaliue<T> coreFailure) core,
     required TResult Function(AuthValueFailure<T> authFailure) auth,
     required TResult Function(NotesValueFailure<T> notesFailure) notes,
   }) {
@@ -174,6 +334,7 @@ class _$_Auth<T> implements _Auth<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
     TResult Function(AuthValueFailure<T> authFailure)? auth,
     TResult Function(NotesValueFailure<T> notesFailure)? notes,
   }) {
@@ -183,6 +344,7 @@ class _$_Auth<T> implements _Auth<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
     TResult Function(AuthValueFailure<T> authFailure)? auth,
     TResult Function(NotesValueFailure<T> notesFailure)? notes,
     required TResult orElse(),
@@ -196,6 +358,7 @@ class _$_Auth<T> implements _Auth<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Core<T> value) core,
     required TResult Function(_Auth<T> value) auth,
     required TResult Function(_Notes<T> value) notes,
   }) {
@@ -205,6 +368,7 @@ class _$_Auth<T> implements _Auth<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
     TResult Function(_Auth<T> value)? auth,
     TResult Function(_Notes<T> value)? notes,
   }) {
@@ -214,6 +378,7 @@ class _$_Auth<T> implements _Auth<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
     TResult Function(_Auth<T> value)? auth,
     TResult Function(_Notes<T> value)? notes,
     required TResult orElse(),
@@ -306,6 +471,7 @@ class _$_Notes<T> implements _Notes<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(CoreValueFaliue<T> coreFailure) core,
     required TResult Function(AuthValueFailure<T> authFailure) auth,
     required TResult Function(NotesValueFailure<T> notesFailure) notes,
   }) {
@@ -315,6 +481,7 @@ class _$_Notes<T> implements _Notes<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
     TResult Function(AuthValueFailure<T> authFailure)? auth,
     TResult Function(NotesValueFailure<T> notesFailure)? notes,
   }) {
@@ -324,6 +491,7 @@ class _$_Notes<T> implements _Notes<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CoreValueFaliue<T> coreFailure)? core,
     TResult Function(AuthValueFailure<T> authFailure)? auth,
     TResult Function(NotesValueFailure<T> notesFailure)? notes,
     required TResult orElse(),
@@ -337,6 +505,7 @@ class _$_Notes<T> implements _Notes<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Core<T> value) core,
     required TResult Function(_Auth<T> value) auth,
     required TResult Function(_Notes<T> value) notes,
   }) {
@@ -346,6 +515,7 @@ class _$_Notes<T> implements _Notes<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
     TResult Function(_Auth<T> value)? auth,
     TResult Function(_Notes<T> value)? notes,
   }) {
@@ -355,6 +525,7 @@ class _$_Notes<T> implements _Notes<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Core<T> value)? core,
     TResult Function(_Auth<T> value)? auth,
     TResult Function(_Notes<T> value)? notes,
     required TResult orElse(),
