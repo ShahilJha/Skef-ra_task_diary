@@ -22,6 +22,21 @@ abstract class ValueObject<T> {
   /// returns wheather the object is valid or not
   bool isValid() => value.isRight();
 
+  /*
+    getter to get _ValueFailure<dynamic>_ for the purpose of getting 
+    failures that do not confirm to any specific data type.
+    This makes it easier to validate an _Entity_ that could have resulted 
+    data type error when validating that entity as a whole.
+    We don't care about the type of ValueFailure or the right Value of the
+    ValueObject, we just consider if there is any ValueFailure or not 
+    thourgh this getter variable.
+  */
+  ///Gives generic _ValueFailure<dynamic>_ of a _ValueObject_
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit => value.fold(
+        (l) => left(l),
+        (r) => right(unit),
+      );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
