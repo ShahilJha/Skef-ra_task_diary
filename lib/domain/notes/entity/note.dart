@@ -4,7 +4,10 @@ import 'package:kt_dart/kt.dart';
 import 'package:skefra_task_diary/domain/core/value_failures/value_failures.dart';
 import 'package:skefra_task_diary/domain/core/value_objects/unique_id.dart';
 import 'package:skefra_task_diary/domain/notes/entity/todo_item.dart';
-import 'package:skefra_task_diary/domain/notes/notes_value_objects.dart';
+
+import '../value_objects/note_body.dart';
+import '../value_objects/note_color.dart';
+import '../value_objects/todo_list.dart';
 part 'note.freezed.dart';
 
 @freezed

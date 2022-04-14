@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:skefra_task_diary/domain/core/value_failures/value_failures.dart';
 import 'package:skefra_task_diary/domain/core/value_objects/unique_id.dart';
-import 'package:skefra_task_diary/domain/notes/notes_value_objects.dart';
+import '../value_objects/todo_name.dart';
 
 part 'todo_item.freezed.dart';
 /*
