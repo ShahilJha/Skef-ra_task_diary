@@ -49,7 +49,6 @@ class SignInForm extends StatelessWidget {
       builder: (context, state) {
         final mediaQuery = MediaQuery.of(context);
         final screenHeight = mediaQuery.size.height * 0.88;
-        var auth;
         return SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
