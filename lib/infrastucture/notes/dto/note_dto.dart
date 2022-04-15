@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/kt.dart';
@@ -45,7 +46,7 @@ class NoteDTO with _$NoteDTO {
     required String body,
     required int color,
     required List<TodoItemDTO> todoList,
-    @ServerTimestampConverter() required Object serverTimeStamp,
+    @ServerTimestampConverter() required FieldValue serverTimeStamp,
   }) = _NoteDTO;
 
   factory NoteDTO.fromDomain(Note note) => NoteDTO(
@@ -58,7 +59,7 @@ class NoteDTO with _$NoteDTO {
               (todoItem) => TodoItemDTO.fromDomain(todoItem),
             )
             .asList(),
-        serverTimeStamp: const ServerTimestampConverter().fromJson(true),
+        serverTimeStamp: FieldValue.serverTimestamp(),
       );
 
   Note toDomain() => Note(
@@ -76,4 +77,13 @@ class NoteDTO with _$NoteDTO {
 
   factory NoteDTO.fromJson(Map<String, dynamic> json) =>
       _$NoteDTOFromJson(json);
+
+  ///_DocumentSnapshot_ is a Firestore specific data type
+  ///DocumentSnapshot doc;
+  ///_doc.data()_ is of type Map<String, dynamic>;
+  ///According to the _FlutterFire_ usage documentation
+  factory NoteDTO.fromFirestore(DocumentSnapshot document) =>
+      NoteDTO.fromJson(document.data()! as Map<String, dynamic>).copyWith(
+        id: document.id,
+      );
 }
