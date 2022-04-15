@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -41,7 +43,6 @@ class NoteDTO with _$NoteDTO {
   const NoteDTO._();
 
   const factory NoteDTO({
-    // ignore: invalid_annotation_target
     @JsonKey(ignore: true) String? id,
     required String body,
     required int color,
