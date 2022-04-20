@@ -165,3 +165,13 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   //   ));
   // }
 }
+
+
+// WeatherBloc(this._weatherRepository) : super(const WeatherState()) {
+//     on<_Started>(_onStarted);
+//     on<_Refreshed>(_onRefreshed);
+//     on<_UnitsChanged>(_onUnitsChanged);
+//   }
+//   final WeatherRepository _weatherRepository;
+
+//   Future<void> _onStarted(_Started event, Emitter<WeatherState> emit) async {}
