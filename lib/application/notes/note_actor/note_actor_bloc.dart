@@ -20,7 +20,7 @@ class NoteActorBloc extends Bloc<NoteActorEvent, NoteActorState> {
           //left failure
           (failure) => emit(NoteActorState.deleteFailure(failure)),
           //right Unit -> success
-          (_) => emit(NoteActorState.deleteSuccess()),
+          (_) => emit(const NoteActorState.deleteSuccess()),
         );
       },
     );
