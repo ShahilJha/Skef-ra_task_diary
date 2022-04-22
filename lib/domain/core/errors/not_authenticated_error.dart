@@ -1,0 +1,1 @@
+class NotAuthenticateError extends Error {}
