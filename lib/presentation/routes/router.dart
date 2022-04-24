@@ -1,15 +1,18 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/notes_overview_page.dart';
 import 'package:skefra_task_diary/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:skefra_task_diary/presentation/splash/splash_page.dart';
 
-import '../pages/home/home_page.dart';
+const rSplash = '/';
+const rLogin = '/login';
+const rNotesOverview = '/login';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(path: '/', page: SplashPage, initial: true),
-    AutoRoute(path: '/home', page: HomePage),
-    AutoRoute(path: '/login', page: SignInPage),
+    AutoRoute(path: rSplash, page: SplashPage, initial: true),
+    AutoRoute(path: rNotesOverview, page: NotesOverviewPage),
+    AutoRoute(path: rLogin, page: SignInPage),
   ],
 )
 class $Router {}

@@ -10,7 +10,7 @@ import 'package:skefra_task_diary/domain/notes/note_failures.dart';
 import 'package:skefra_task_diary/domain/notes/value_objects/note_body.dart';
 import 'package:skefra_task_diary/domain/notes/value_objects/note_color.dart';
 import 'package:skefra_task_diary/domain/notes/value_objects/todo_list.dart';
-import 'package:skefra_task_diary/presentation/presentation_classes/notes/note_form/misc/toto_items_presentation_classes.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/note_form/misc/toto_items_presentation_classes.dart';
 
 import '../../../domain/notes/entity/note.dart';
 
