@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skefra_task_diary/application/auth/auth_bloc.dart';
 import 'package:skefra_task_diary/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:skefra_task_diary/injection.dart';
 import 'package:skefra_task_diary/presentation/routes/router.dart';
@@ -40,6 +41,10 @@ class SignInForm extends StatelessWidget {
             (_) {
               //Navigation
               context.router.replaceNamed(rNotesOverview);
+              //making the auth state in the AuthBloc as _authenticated_
+              context
+                  .read<AuthBloc>()
+                  .add(const AuthEvent.authCheckRequested());
             },
           ),
         );
