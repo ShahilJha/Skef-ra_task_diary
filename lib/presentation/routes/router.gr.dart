@@ -40,7 +40,7 @@ class Router extends _i4.RootStackRouter {
   @override
   List<_i4.RouteConfig> get routes => [
         _i4.RouteConfig(SplashRoute.name, path: '/'),
-        _i4.RouteConfig(NotesOverviewRoute.name, path: '/login'),
+        _i4.RouteConfig(NotesOverviewRoute.name, path: '/notesOverview'),
         _i4.RouteConfig(SignInRoute.name, path: '/login')
       ];
 }
@@ -56,7 +56,8 @@ class SplashRoute extends _i4.PageRouteInfo<void> {
 /// generated route for
 /// [_i2.NotesOverviewPage]
 class NotesOverviewRoute extends _i4.PageRouteInfo<void> {
-  const NotesOverviewRoute() : super(NotesOverviewRoute.name, path: '/login');
+  const NotesOverviewRoute()
+      : super(NotesOverviewRoute.name, path: '/notesOverview');
 
   static const String name = 'NotesOverviewRoute';
 }

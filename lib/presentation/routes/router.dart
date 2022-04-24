@@ -5,7 +5,7 @@ import 'package:skefra_task_diary/presentation/splash/splash_page.dart';
 
 const rSplash = '/';
 const rLogin = '/login';
-const rNotesOverview = '/login';
+const rNotesOverview = '/notesOverview';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
