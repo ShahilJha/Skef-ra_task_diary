@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skefra_task_diary/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:skefra_task_diary/injection.dart';
+import 'package:skefra_task_diary/presentation/routes/router.dart';
 import 'package:skefra_task_diary/presentation/ui_util/utilities.dart';
 import 'package:skefra_task_diary/presentation/widgets/app_button.dart';
 import 'package:skefra_task_diary/presentation/widgets/app_text_field.dart';
@@ -38,7 +39,7 @@ class SignInForm extends StatelessWidget {
             //Unit
             (_) {
               //Navigation
-              context.navigateNamedTo('/home');
+              context.router.replaceNamed(rNotesOverview);
             },
           ),
         );
