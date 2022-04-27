@@ -12,7 +12,7 @@ class NotesOverviewBody extends StatelessWidget {
       builder: (context, state) {
         return state.map(
           initial: (_) => Container(),
-          loadInProgress: (_) => const ProcessingIndicator(),
+          loadInProgress: (_) => const ProcessingIndicator(neumorphic: true),
           loadSuccess: (state) {
             return ListView.builder(
               itemCount: state.notes.size,
