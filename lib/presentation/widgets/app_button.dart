@@ -8,6 +8,8 @@ class AppButton extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final AlignmentGeometry? alignment;
   final Color? color;
+  final Color? textColor;
+  final Color? borderColor;
   const AppButton({
     Key? key,
     required this.name,
@@ -16,6 +18,8 @@ class AppButton extends StatelessWidget {
     this.margin,
     this.alignment,
     this.color,
+    this.textColor,
+    this.borderColor,
   }) : super(key: key);
 
   @override
@@ -23,12 +27,22 @@ class AppButton extends StatelessWidget {
     return Container(
       margin: margin ?? const EdgeInsets.symmetric(vertical: 10),
       child: ElevatedButton(
-        child: Text(name),
+        child: Text(
+          name,
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
         style: ElevatedButton.styleFrom(
           primary: color ?? Theme.of(context).primaryColor,
           elevation: 5.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: BorderSide(
+              color: borderColor ?? Colors.white.withOpacity(0.00),
+              width: 2,
+            ),
+          ),
           padding: padding ??
               const EdgeInsets.symmetric(
                 vertical: 20,
