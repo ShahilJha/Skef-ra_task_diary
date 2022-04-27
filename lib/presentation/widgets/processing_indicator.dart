@@ -9,6 +9,7 @@ class ProcessingIndicator extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(25),
         decoration: const BoxDecoration(
+          //TODO: use kScaffoldBackgroundColor with neumorphism
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),

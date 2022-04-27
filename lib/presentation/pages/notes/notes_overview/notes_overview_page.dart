@@ -5,6 +5,7 @@ import 'package:skefra_task_diary/application/auth/auth_bloc.dart';
 import 'package:skefra_task_diary/application/notes/note_actor/note_actor_bloc.dart';
 import 'package:skefra_task_diary/application/notes/note_watcher/note_watcher_bloc.dart';
 import 'package:skefra_task_diary/injection.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/notes_overview_body.dart';
 import 'package:skefra_task_diary/presentation/routes/router.dart';
 import 'package:skefra_task_diary/presentation/ui_util/utilities.dart';
 
@@ -77,7 +78,7 @@ class NotesOverviewPage extends StatelessWidget {
               //TODO: Navigate to Note-form-page
             },
           ),
-          body: Container(),
+          body: const NotesOverviewBody(),
         ),
       ),
     );
