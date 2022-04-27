@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skefra_task_diary/application/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/critical_failure_display_widget.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/error_note_card_widget.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/note_card_widget.dart';
 import 'package:skefra_task_diary/presentation/widgets/processing_indicator.dart';
@@ -26,10 +27,8 @@ class NotesOverviewBody extends StatelessWidget {
               },
             );
           },
-          loadFailure: (state) => Container(
-            color: Colors.purpleAccent,
-            height: 200,
-          ),
+          loadFailure: (state) =>
+              CriticalFailureDisplay(failure: state.noteFailure),
         );
       },
     );
