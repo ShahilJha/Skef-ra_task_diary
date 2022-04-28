@@ -6,6 +6,7 @@ import 'package:skefra_task_diary/application/notes/note_actor/note_actor_bloc.d
 import 'package:skefra_task_diary/application/notes/note_watcher/note_watcher_bloc.dart';
 import 'package:skefra_task_diary/injection.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/notes_overview_body.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/uncompleted_switch.dart';
 import 'package:skefra_task_diary/presentation/routes/router.dart';
 import 'package:skefra_task_diary/presentation/ui_util/utilities.dart';
 
@@ -62,14 +63,7 @@ class NotesOverviewPage extends StatelessWidget {
               },
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.check_box_outline_blank),
-                onPressed: () {},
-              ),
-              // IconButton(
-              //   icon: const Icon(Icons.check_box),
-              //   onPressed: () {},
-              // ),
+              UncompletedSwitch(),
             ],
           ),
           floatingActionButton: FloatingActionButton(
