@@ -21,13 +21,13 @@ class Utilities {
   // pop with getIt: getIt<appRouter.Router>().pop()
   // context with getIt: getIt<appRouter.Router>().navigatorKey.currentState!.context
 
-  dynamic showProcessing() {
-    return showDialog(
-      context: app_router.Router().navigatorKey.currentState!.context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const ProcessingIndicator();
-      },
-    );
-  }
+  // dynamic showProcessing() {
+  //   return showDialog(
+  //     context: app_router.Router().navigatorKey.currentState!.context,
+  //     barrierDismissible: false,
+  //     builder: (BuildContext context) {
+  //       return const ProcessingIndicator();
+  //     },
+  //   );
+  // }
 }
