@@ -8,6 +8,7 @@ import 'package:skefra_task_diary/injection.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/notes_overview_body.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/local_widgets/uncompleted_switch.dart';
 import 'package:skefra_task_diary/presentation/routes/router.dart';
+import 'package:skefra_task_diary/presentation/routes/router.gr.dart';
 import 'package:skefra_task_diary/presentation/ui_util/utilities.dart';
 
 class NotesOverviewPage extends StatelessWidget {
@@ -68,9 +69,8 @@ class NotesOverviewPage extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: () {
-              //TODO: Navigate to Note-form-page
-            },
+            onPressed: () =>
+                context.router.navigate(NoteFormRoute(editedNote: null)),
           ),
           body: const NotesOverviewBody(),
         ),

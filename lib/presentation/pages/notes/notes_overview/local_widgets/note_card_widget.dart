@@ -6,6 +6,7 @@ import 'package:skefra_task_diary/application/notes/note_actor/note_actor_bloc.d
 import 'package:skefra_task_diary/domain/notes/entity/note.dart';
 import 'package:skefra_task_diary/domain/notes/entity/todo_item.dart';
 import 'package:skefra_task_diary/global_constants.dart';
+import 'package:skefra_task_diary/presentation/routes/router.gr.dart';
 import 'package:skefra_task_diary/presentation/widgets/app_button.dart';
 
 class NoteCard extends StatelessWidget {
@@ -24,11 +25,8 @@ class NoteCard extends StatelessWidget {
       ),
       color: note.color.getOrCrash(),
       child: InkWell(
-        onTap: () {
-          //TODO: go to note form for edit
-        },
+        onTap: () => context.router.navigate(NoteFormRoute(editedNote: note)),
         onLongPress: () {
-          //Todo: show delete dialog
           final noteActorBloc = context.read<NoteActorBloc>();
           _showDeletionDialgo(context, noteActorBloc);
         },

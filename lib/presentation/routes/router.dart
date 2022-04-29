@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/note_form/note_form_page.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/notes_overview/notes_overview_page.dart';
 import 'package:skefra_task_diary/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:skefra_task_diary/presentation/splash/splash_page.dart';
@@ -6,6 +7,7 @@ import 'package:skefra_task_diary/presentation/splash/splash_page.dart';
 const rSplash = '/';
 const rLogin = '/login';
 const rNotesOverview = '/notesOverview';
+const rNotesForm = '/notesForm';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -13,6 +15,7 @@ const rNotesOverview = '/notesOverview';
     AutoRoute(path: rSplash, page: SplashPage, initial: true),
     AutoRoute(path: rNotesOverview, page: NotesOverviewPage),
     AutoRoute(path: rLogin, page: SignInPage),
+    AutoRoute(path: rNotesForm, page: NoteFormPage, fullscreenDialog: true),
   ],
 )
 class $Router {}

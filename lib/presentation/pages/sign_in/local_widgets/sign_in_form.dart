@@ -48,9 +48,6 @@ class SignInForm extends StatelessWidget {
             },
           ),
         );
-
-        //show in-process circular indicator
-        state.isSubmitting == true ? getIt<Utilities>().showProcessing() : null;
       },
       builder: (context, state) {
         final mediaQuery = MediaQuery.of(context);

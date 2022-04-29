@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skefra_task_diary/injection.dart';
 import 'package:skefra_task_diary/presentation/pages/sign_in/local_widgets/sign_in_form.dart';
 import 'package:skefra_task_diary/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:skefra_task_diary/presentation/widgets/in_process_overlay.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -17,7 +18,16 @@ class SignInPage extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => getIt<SignInFormBloc>(),
-        child: const SignInForm(),
+        child: BlocBuilder<SignInFormBloc, SignInFormState>(
+          builder: (context, state) {
+            return Stack(
+              children: [
+                const SignInForm(),
+                InProcessOverlay(inProcess: state.isSubmitting),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
