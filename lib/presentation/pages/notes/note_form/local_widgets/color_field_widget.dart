@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skefra_task_diary/application/notes/note_form/note_form_bloc.dart';
 import 'package:skefra_task_diary/domain/notes/value_objects/note_color.dart';
