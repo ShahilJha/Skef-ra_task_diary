@@ -13,12 +13,16 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? hintText;
+  final String? counterText;
   final String? labelText;
   final IconData? icon;
   final IconData? suffixIcon;
   final bool? autoFocus;
   final bool? autoCorrect;
+  final bool? roundBorder;
   final int? maxLines;
+  final int? minLines;
+  final int? maxLength;
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
@@ -27,6 +31,7 @@ class AppTextField extends StatelessWidget {
   final VoidCallback? onSuffixIconPressed;
   final Function(String)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
+  final TextAlign? textAlign;
 
   const AppTextField({
     Key? key,
@@ -47,6 +52,11 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.autoCorrect,
     this.suffixIcon,
+    this.roundBorder,
+    this.textAlign,
+    this.maxLength,
+    this.minLines,
+    this.counterText,
   }) : super(key: key);
 
   @override
@@ -74,10 +84,11 @@ class AppTextField extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
             validator: validator,
-            textAlign: TextAlign.center,
+            textAlign: textAlign ?? TextAlign.center,
             decoration: InputDecoration(
               labelText: labelText ?? 'Email',
               hintText: hintText ?? 'abc@email.com',
+              counterText: counterText,
               prefixIcon: const Icon(Icons.mail),
               suffixIcon: controller == null //if controller is not given
                   ? IconButton(
@@ -101,10 +112,14 @@ class AppTextField extends StatelessWidget {
                               },
                             ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
             ),
             onChanged: onChanged,
@@ -122,11 +137,12 @@ class AppTextField extends StatelessWidget {
             textInputAction: TextInputAction.done,
             validator: validator,
             autocorrect: false,
-            textAlign: TextAlign.center,
+            textAlign: textAlign ?? TextAlign.center,
             obscureText: obscurePassword,
             decoration: InputDecoration(
               labelText: labelText ?? 'Password',
               hintText: hintText ?? 'pAssWord1@',
+              counterText: counterText,
               prefixIcon: const Icon(Icons.lock),
               suffixIcon: IconButton(
                 icon: obscurePassword
@@ -135,10 +151,14 @@ class AppTextField extends StatelessWidget {
                 onPressed: onSuffixIconPressed,
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
             ),
             onChanged: onChanged,
@@ -151,17 +171,17 @@ class AppTextField extends StatelessWidget {
           margin: margin ?? _margin,
           child: TextFormField(
             autofocus: autoFocus ?? false,
-            maxLines: maxLines,
             controller: controller,
             keyboardType: keyboardType ?? TextInputType.number,
             textInputAction: TextInputAction.done,
             validator: validator,
             autocorrect: false,
-            textAlign: TextAlign.center,
+            textAlign: textAlign ?? TextAlign.center,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             decoration: InputDecoration(
               labelText: labelText ?? 'Numbers',
               hintText: hintText ?? '123',
+              counterText: counterText,
               alignLabelWithHint: true,
               hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic),
               prefixIcon: icon != null ? Icon(icon) : null,
@@ -172,10 +192,14 @@ class AppTextField extends StatelessWidget {
                       onPressed: onSuffixIconPressed,
                     ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
             ),
             onChanged: onChanged,
@@ -188,15 +212,18 @@ class AppTextField extends StatelessWidget {
           margin: margin ?? _margin,
           child: TextFormField(
             autofocus: autoFocus ?? false,
-            autocorrect: autoCorrect ?? true,
+            autocorrect: autoCorrect ?? false,
             maxLines: maxLines,
+            minLines: minLines,
+            maxLength: maxLength,
             controller: controller,
             keyboardType: keyboardType ?? TextInputType.text,
             textInputAction: TextInputAction.done,
             validator: validator,
-            textAlign: TextAlign.center,
+            textAlign: textAlign ?? TextAlign.center,
             inputFormatters: [...?inputFormatters],
             decoration: InputDecoration(
+              counterText: counterText,
               labelText: labelText,
               hintText: hintText,
               alignLabelWithHint: true,
@@ -209,10 +236,14 @@ class AppTextField extends StatelessWidget {
                       onPressed: onSuffixIconPressed,
                     ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: roundBorder ?? true
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
               ),
             ),
             onChanged: onChanged,
