@@ -72,8 +72,9 @@ class BodyField extends HookWidget {
         textEditingController.text = state.note.body.getOrCrash();
       },
       child: AppTextField(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         controller: textEditingController,
-        hintText: 'test',
+        hintText: 'Note Body',
         maxLength: NoteBody.maxLength,
         counterText: '',
         maxLines: null,

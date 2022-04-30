@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:skefra_task_diary/application/notes/note_form/note_form_bloc.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/note_form/local_widgets/color_field_widget.dart';
 import 'body_field_widget.dart';
 
 class NotePageFormScaffold extends HookWidget {
@@ -39,8 +40,9 @@ class NotePageFormScaffold extends HookWidget {
                 : AutovalidateMode.disabled,
             child: SingleChildScrollView(
               child: Column(
-                children: [
-                  const BodyField(),
+                children: const [
+                  BodyField(),
+                  ColorField(),
                 ],
               ),
             ),
