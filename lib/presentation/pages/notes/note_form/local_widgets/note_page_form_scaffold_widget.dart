@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:skefra_task_diary/application/notes/note_form/note_form_bloc.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/note_form/local_widgets/add_todo_tile_widget.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/note_form/local_widgets/color_field_widget.dart';
+import 'package:skefra_task_diary/presentation/pages/notes/note_form/local_widgets/todo_list_widget.dart';
 import 'package:skefra_task_diary/presentation/pages/notes/note_form/misc/form_todos.dart';
 import 'body_field_widget.dart';
 
@@ -48,6 +49,7 @@ class NotePageFormScaffold extends HookWidget {
                   children: const [
                     BodyField(),
                     ColorField(),
+                    TodoList(),
                     AddTodoTile(),
                   ],
                 ),
