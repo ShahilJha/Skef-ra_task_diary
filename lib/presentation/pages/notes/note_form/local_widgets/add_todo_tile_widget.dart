@@ -39,7 +39,7 @@ class AddTodoTile extends StatelessWidget {
             formTodosProvider.value =
                 formTodosProvider.value.plusElement(TodoItemPrimitive.empty());
             context.read<NoteFormBloc>().add(
-                  NoteFormEvent.todosChanged(context.read<FormTodos>().value),
+                  NoteFormEvent.todosChanged(formTodosProvider.value),
                 );
           },
         );
