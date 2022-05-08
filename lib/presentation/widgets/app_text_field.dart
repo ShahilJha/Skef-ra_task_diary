@@ -7,9 +7,11 @@ enum TextFieldType {
   password,
   normal,
   number,
+  plain,
 }
 
 class AppTextField extends StatelessWidget {
+  final TextFieldType textFieldType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? hintText;
@@ -26,7 +28,6 @@ class AppTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
-  final TextFieldType textFieldType;
   final bool obscurePassword;
   final VoidCallback? onSuffixIconPressed;
   final Function(String)? onChanged;
@@ -201,6 +202,42 @@ class AppTextField extends StatelessWidget {
                     ? BorderRadius.circular(100)
                     : BorderRadius.circular(10),
               ),
+            ),
+            onChanged: onChanged,
+          ),
+        );
+
+      case TextFieldType.plain:
+        return Container(
+          padding: padding ?? _padding,
+          margin: margin ?? _margin,
+          child: TextFormField(
+            autofocus: autoFocus ?? false,
+            autocorrect: autoCorrect ?? false,
+            maxLines: maxLines,
+            minLines: minLines,
+            maxLength: maxLength,
+            controller: controller,
+            keyboardType: keyboardType ?? TextInputType.text,
+            textInputAction: TextInputAction.next,
+            validator: validator,
+            textAlign: textAlign ?? TextAlign.center,
+            inputFormatters: [...?inputFormatters],
+            decoration: InputDecoration(
+              counterText: counterText,
+              labelText: labelText,
+              hintText: hintText,
+              alignLabelWithHint: true,
+              hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic),
+              prefixIcon: icon != null ? Icon(icon) : null,
+              suffixIcon: suffixIcon == null
+                  ? null
+                  : IconButton(
+                      icon: Icon(suffixIcon),
+                      onPressed: onSuffixIconPressed,
+                    ),
+              focusedBorder: InputBorder.none,
+              border: InputBorder.none,
             ),
             onChanged: onChanged,
           ),
