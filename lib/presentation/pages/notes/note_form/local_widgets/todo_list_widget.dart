@@ -32,7 +32,10 @@ class TodoList extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: formTodos.value.size,
             itemBuilder: (context, index) {
-              return TodoTile(index: index);
+              return TodoTile(
+                key: ValueKey(context.read<FormTodos>().value[index].id),
+                index: index,
+              );
             },
           );
         },
