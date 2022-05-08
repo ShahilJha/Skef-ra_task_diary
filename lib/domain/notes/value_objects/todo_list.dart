@@ -8,7 +8,7 @@ import '../notes_value_validators.dart';
 class TodoList<T> extends ValueObject<KtList<T>> {
   @override
   final Either<ValueFailure<KtList<T>>, KtList<T>> value;
-  static const maxLength = 10;
+  static const maxLength = 5;
 
   const TodoList._(this.value);
 
