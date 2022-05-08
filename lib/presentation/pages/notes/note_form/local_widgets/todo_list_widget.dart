@@ -41,8 +41,9 @@ class TodoList extends StatelessWidget {
               final mutableList = _formTodoProvider.value.asList();
 
               //change index from old to new
-              mutableList.removeAt(oldIndex);
-              mutableList.insert(newIndex, tempValue);
+              mutableList
+                ..removeAt(oldIndex)
+                ..insert(newIndex, tempValue);
 
               //put new list to immutable and assign to <FormTodo>
               _formTodoProvider.value = mutableList.toImmutableList();
@@ -55,7 +56,7 @@ class TodoList extends StatelessWidget {
             itemCount: formTodos.value.size,
             itemBuilder: (context, index) {
               return TodoTile(
-                key: ValueKey(context.read<FormTodos>().value[index]),
+                key: ValueKey(_formTodoProvider.value[index]),
                 index: index,
               );
             },
