@@ -24,58 +24,70 @@ class TodoTile extends HookWidget {
     );
     //_TextEditingController_ to input text if todo already exists
     final textEditingController = useTextEditingController(text: todo.name);
-    return ListTile(
-      leading: Checkbox(
-        value: todo.done,
-        onChanged: (value) {
-          //mapping or replacing all value in the list, as the KtList us immutable
-          formTodoProvider.value = formTodoProvider.value.map(
-            (listTodo) =>
-                listTodo == todo ? todo.copyWith(done: value!) : listTodo,
-          );
-          //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-          context.read<NoteFormBloc>().add(
-                NoteFormEvent.todosChanged(formTodoProvider.value),
-              );
-        },
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        vertical: 5,
+        horizontal: 12,
       ),
-      title: AppTextField(
-        controller: textEditingController,
-        textFieldType: TextFieldType.plain,
-        hintText: 'Todo',
-        textAlign: TextAlign.start,
-        maxLength: TodoName.maxLength,
-        counterText: '',
-        onChanged: (value) {
-          //mapping or replacing all value in the list, as the KtList us immutable
-          formTodoProvider.value = formTodoProvider.value.map(
-            (listTodo) =>
-                listTodo == todo ? todo.copyWith(name: value) : listTodo,
-          );
-          //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-          context.read<NoteFormBloc>().add(
-                NoteFormEvent.todosChanged(formTodoProvider.value),
-              );
-        },
-        validator: (_) => _bloc.state.note.todoList.value.fold(
-          //left ValueFailure of the whole list, not the individual list item
-          (leftFailure) => null,
-          //rightValue giving the _TodoListItem_ with the specified _[index]_
-          (todoList) => todoList[index].name.value.fold(
-                //leftValueFailure of the _TodoItem[index]_
-                (leftValueFailure) => leftValueFailure.maybeMap(
-                  core: (valueFailure) => valueFailure.coreFailure.maybeMap(
-                    exceedingLength: (failure) =>
-                        'Exceeding Length, Max: ${failure.max}',
-                    empty: (_) => 'Empty Body',
-                    multiLine: (_) => 'Todos can\'t be multi-lined',
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ListTile(
+        leading: Checkbox(
+          value: todo.done,
+          onChanged: (value) {
+            //mapping or replacing all value in the list, as the KtList us immutable
+            formTodoProvider.value = formTodoProvider.value.map(
+              (listTodo) =>
+                  listTodo == todo ? todo.copyWith(done: value!) : listTodo,
+            );
+            //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
+            context.read<NoteFormBloc>().add(
+                  NoteFormEvent.todosChanged(formTodoProvider.value),
+                );
+          },
+        ),
+        title: AppTextField(
+          controller: textEditingController,
+          textFieldType: TextFieldType.plain,
+          hintText: 'Todo',
+          textAlign: TextAlign.start,
+          maxLength: TodoName.maxLength,
+          counterText: '',
+          onChanged: (value) {
+            //mapping or replacing all value in the list, as the KtList us immutable
+            formTodoProvider.value = formTodoProvider.value.map(
+              (listTodo) =>
+                  listTodo == todo ? todo.copyWith(name: value) : listTodo,
+            );
+            //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
+            context.read<NoteFormBloc>().add(
+                  NoteFormEvent.todosChanged(formTodoProvider.value),
+                );
+          },
+          validator: (_) => _bloc.state.note.todoList.value.fold(
+            //left ValueFailure of the whole list, not the individual list item
+            (leftFailure) => null,
+            //rightValue giving the _TodoListItem_ with the specified _[index]_
+            (todoList) => todoList[index].name.value.fold(
+                  //leftValueFailure of the _TodoItem[index]_
+                  (leftValueFailure) => leftValueFailure.maybeMap(
+                    core: (valueFailure) => valueFailure.coreFailure.maybeMap(
+                      exceedingLength: (failure) =>
+                          'Exceeding Length, Max: ${failure.max}',
+                      empty: (_) => 'Empty Body',
+                      multiLine: (_) => 'Todos can\'t be multi-lined',
+                      orElse: () => null,
+                    ),
                     orElse: () => null,
                   ),
-                  orElse: () => null,
+                  //rightValue :: correct value, so need to do anything
+                  (_) => null,
                 ),
-                //rightValue :: correct value, so need to do anything
-                (_) => null,
-              ),
+          ),
         ),
       ),
     );
