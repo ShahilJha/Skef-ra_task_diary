@@ -16,15 +16,15 @@ class TodoTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = context.read<NoteFormBloc>();
-    final formTodoProvider = context.read<FormTodos>();
+    final _formTodoProvider = context.read<FormTodos>();
     //returns an _TodoTIle_ with an empty _TodoItemPrimitive.empty()_
     //in case of ArrayOutOfBound with the passed _index_
-    final todo = formTodoProvider.value.getOrElse(
+    final _todo = _formTodoProvider.value.getOrElse(
       index,
       (_) => TodoItemPrimitive.empty(),
     );
     //_TextEditingController_ to input text if todo already exists
-    final textEditingController = useTextEditingController(text: todo.name);
+    final textEditingController = useTextEditingController(text: _todo.name);
     return Slidable(
       // key: const ValueKey(0),
       endActionPane: ActionPane(
@@ -43,11 +43,11 @@ class TodoTile extends HookWidget {
               //item from the memory, as the list has not change, but only
               //giving a totally new list and we are replacing the new list
               //in the physical memory
-              formTodoProvider.value =
-                  formTodoProvider.value.minusElement(todo);
+              _formTodoProvider.value =
+                  _formTodoProvider.value.minusElement(_todo);
               //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
               _bloc.add(
-                NoteFormEvent.todosChanged(formTodoProvider.value),
+                NoteFormEvent.todosChanged(_formTodoProvider.value),
               );
             },
           ),
@@ -66,18 +66,24 @@ class TodoTile extends HookWidget {
         ),
         child: ListTile(
           leading: Checkbox(
-            value: todo.done,
+            value: _todo.done,
             onChanged: (value) {
               //mapping or replacing all value in the list, as the KtList us immutable
-              formTodoProvider.value = formTodoProvider.value.map(
+              _formTodoProvider.value = _formTodoProvider.value.map(
                 (listTodo) =>
-                    listTodo == todo ? todo.copyWith(done: value!) : listTodo,
+                    listTodo == _todo ? _todo.copyWith(done: value!) : listTodo,
               );
               //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
               _bloc.add(
-                NoteFormEvent.todosChanged(formTodoProvider.value),
+                NoteFormEvent.todosChanged(_formTodoProvider.value),
               );
             },
+          ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.drag_indicator),
+            ],
           ),
           title: AppTextField(
             controller: textEditingController,
@@ -88,13 +94,13 @@ class TodoTile extends HookWidget {
             counterText: '',
             onChanged: (value) {
               //mapping or replacing all value in the list, as the KtList us immutable
-              formTodoProvider.value = formTodoProvider.value.map(
+              _formTodoProvider.value = _formTodoProvider.value.map(
                 (listTodo) =>
-                    listTodo == todo ? todo.copyWith(name: value) : listTodo,
+                    listTodo == _todo ? _todo.copyWith(name: value) : listTodo,
               );
               //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
               _bloc.add(
-                NoteFormEvent.todosChanged(formTodoProvider.value),
+                NoteFormEvent.todosChanged(_formTodoProvider.value),
               );
             },
             validator: (_) => _bloc.state.note.todoList.value.fold(
