@@ -53,75 +53,82 @@ class TodoTile extends HookWidget {
           ),
         ],
       ),
-      child: Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: 5,
-          horizontal: 12,
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).colorScheme.secondary,
+      child: Material(
+        elevation: 4,
+        child: Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: 5,
+            horizontal: 12,
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: ListTile(
-          leading: Checkbox(
-            value: _todo.done,
-            onChanged: (value) {
-              //mapping or replacing all value in the list, as the KtList us immutable
-              _formTodoProvider.value = _formTodoProvider.value.map(
-                (listTodo) =>
-                    listTodo == _todo ? _todo.copyWith(done: value!) : listTodo,
-              );
-              //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-              _bloc.add(
-                NoteFormEvent.todosChanged(_formTodoProvider.value),
-              );
-            },
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.drag_indicator),
-            ],
-          ),
-          title: AppTextField(
-            controller: textEditingController,
-            textFieldType: TextFieldType.plain,
-            hintText: 'Todo',
-            textAlign: TextAlign.start,
-            maxLength: TodoName.maxLength,
-            counterText: '',
-            onChanged: (value) {
-              //mapping or replacing all value in the list, as the KtList us immutable
-              _formTodoProvider.value = _formTodoProvider.value.map(
-                (listTodo) =>
-                    listTodo == _todo ? _todo.copyWith(name: value) : listTodo,
-              );
-              //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-              _bloc.add(
-                NoteFormEvent.todosChanged(_formTodoProvider.value),
-              );
-            },
-            validator: (_) => _bloc.state.note.todoList.value.fold(
-              //left ValueFailure of the whole list, not the individual list item
-              (leftFailure) => null,
-              //rightValue giving the _TodoListItem_ with the specified _[index]_
-              (todoList) => todoList[index].name.value.fold(
-                    //leftValueFailure of the _TodoItem[index]_
-                    (leftValueFailure) => leftValueFailure.maybeMap(
-                      core: (valueFailure) => valueFailure.coreFailure.maybeMap(
-                        exceedingLength: (failure) =>
-                            'Exceeding Length, Max: ${failure.max}',
-                        empty: (_) => 'Empty Body',
-                        multiLine: (_) => 'Todos can\'t be multi-lined',
+          child: ListTile(
+            leading: Checkbox(
+              value: _todo.done,
+              onChanged: (value) {
+                //mapping or replacing all value in the list, as the KtList us immutable
+                _formTodoProvider.value = _formTodoProvider.value.map(
+                  (listTodo) => listTodo == _todo
+                      ? _todo.copyWith(done: value!)
+                      : listTodo,
+                );
+                //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
+                _bloc.add(
+                  NoteFormEvent.todosChanged(_formTodoProvider.value),
+                );
+              },
+            ),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.drag_indicator),
+              ],
+            ),
+            title: AppTextField(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+              controller: textEditingController,
+              textFieldType: TextFieldType.plain,
+              hintText: 'Todo',
+              textAlign: TextAlign.start,
+              maxLength: TodoName.maxLength,
+              counterText: '',
+              onChanged: (value) {
+                //mapping or replacing all value in the list, as the KtList us immutable
+                _formTodoProvider.value = _formTodoProvider.value.map(
+                  (listTodo) => listTodo == _todo
+                      ? _todo.copyWith(name: value)
+                      : listTodo,
+                );
+                //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
+                _bloc.add(
+                  NoteFormEvent.todosChanged(_formTodoProvider.value),
+                );
+              },
+              validator: (_) => _bloc.state.note.todoList.value.fold(
+                //left ValueFailure of the whole list, not the individual list item
+                (leftFailure) => null,
+                //rightValue giving the _TodoListItem_ with the specified _[index]_
+                (todoList) => todoList[index].name.value.fold(
+                      //leftValueFailure of the _TodoItem[index]_
+                      (leftValueFailure) => leftValueFailure.maybeMap(
+                        core: (valueFailure) =>
+                            valueFailure.coreFailure.maybeMap(
+                          exceedingLength: (failure) =>
+                              'Exceeding Length, Max: ${failure.max}',
+                          empty: (_) => 'Empty Body',
+                          multiLine: (_) => 'Todos can\'t be multi-lined',
+                          orElse: () => null,
+                        ),
                         orElse: () => null,
                       ),
-                      orElse: () => null,
+                      //rightValue :: correct value, so need to do anything
+                      (_) => null,
                     ),
-                    //rightValue :: correct value, so need to do anything
-                    (_) => null,
-                  ),
+              ),
             ),
           ),
         ),
