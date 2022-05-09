@@ -56,7 +56,7 @@ class TodoList extends StatelessWidget {
             itemCount: formTodos.value.size,
             itemBuilder: (context, index) {
               return TodoTile(
-                key: ValueKey(_formTodoProvider.value[index]),
+                key: ValueKey(_formTodoProvider.value[index].id),
                 index: index,
               );
             },
