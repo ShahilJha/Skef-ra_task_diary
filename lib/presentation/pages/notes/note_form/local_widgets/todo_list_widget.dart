@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:skefra_task_diary/application/notes/note_form/note_form_bloc.dart';
 import 'package:skefra_task_diary/domain/notes/value_objects/todo_list.dart'
     as widget;
@@ -15,8 +15,6 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _bloc = context.read<NoteFormBloc>();
-    final _formTodoProvider = context.read<FormTodos>();
     return BlocListener<NoteFormBloc, NoteFormState>(
       listenWhen: (previous, current) =>
           previous.note.todoList.isFull != current.note.todoList.isFull,
@@ -27,7 +25,7 @@ class TodoList extends StatelessWidget {
                   'Maximum Limit Reached: ${widget.TodoList.maxLength} Tasks');
         }
       },
-      child: Consumer<FormTodos>(
+      child: provider.Consumer<FormTodos>(
         builder: (context, formTodos, child) {
           return ReorderableListView.builder(
             shrinkWrap: true,
@@ -36,9 +34,9 @@ class TodoList extends StatelessWidget {
               if (newIndex > oldIndex) newIndex--;
 
               //assign item to temp variable
-              final tempValue = _formTodoProvider.value[oldIndex];
+              final tempValue = context.read<FormTodos>().value[oldIndex];
               //convert to mutuable
-              final mutableList = _formTodoProvider.value.asList();
+              final mutableList = context.read<FormTodos>().value.asList();
 
               //change index from old to new
               mutableList
@@ -46,17 +44,17 @@ class TodoList extends StatelessWidget {
                 ..insert(newIndex, tempValue);
 
               //put new list to immutable and assign to <FormTodo>
-              _formTodoProvider.value = mutableList.toImmutableList();
+              context.read<FormTodos>().value = mutableList.toImmutableList();
 
               //communicate change to bloc through event
-              _bloc.add(
-                NoteFormEvent.todosChanged(_formTodoProvider.value),
-              );
+              context.read<NoteFormBloc>().add(
+                    NoteFormEvent.todosChanged(context.read<FormTodos>().value),
+                  );
             },
             itemCount: formTodos.value.size,
             itemBuilder: (context, index) {
               return TodoTile(
-                key: ValueKey(_formTodoProvider.value[index].id),
+                key: ValueKey(context.read<FormTodos>().value[index].id),
                 index: index,
               );
             },

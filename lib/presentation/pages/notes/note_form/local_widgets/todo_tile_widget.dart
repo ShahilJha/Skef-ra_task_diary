@@ -15,14 +15,12 @@ class TodoTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _bloc = context.read<NoteFormBloc>();
-    final _formTodoProvider = context.read<FormTodos>();
     //returns an _TodoTIle_ with an empty _TodoItemPrimitive.empty()_
     //in case of ArrayOutOfBound with the passed _index_
-    final _todo = _formTodoProvider.value.getOrElse(
-      index,
-      (_) => TodoItemPrimitive.empty(),
-    );
+    final _todo = context.read<FormTodos>().value.getOrElse(
+          index,
+          (_) => TodoItemPrimitive.empty(),
+        );
     //_TextEditingController_ to input text if todo already exists
     final textEditingController = useTextEditingController(text: _todo.name);
     return Slidable(
@@ -43,12 +41,12 @@ class TodoTile extends HookWidget {
               //item from the memory, as the list has not change, but only
               //giving a totally new list and we are replacing the new list
               //in the physical memory
-              _formTodoProvider.value =
-                  _formTodoProvider.value.minusElement(_todo);
+              context.read<FormTodos>().value =
+                  context.read<FormTodos>().value.minusElement(_todo);
               //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-              _bloc.add(
-                NoteFormEvent.todosChanged(_formTodoProvider.value),
-              );
+              context.read<NoteFormBloc>().add(
+                    NoteFormEvent.todosChanged(context.read<FormTodos>().value),
+                  );
             },
           ),
         ],
@@ -71,15 +69,17 @@ class TodoTile extends HookWidget {
               value: _todo.done,
               onChanged: (value) {
                 //mapping or replacing all value in the list, as the KtList us immutable
-                _formTodoProvider.value = _formTodoProvider.value.map(
-                  (listTodo) => listTodo == _todo
-                      ? _todo.copyWith(done: value!)
-                      : listTodo,
-                );
+                context.read<FormTodos>().value =
+                    context.read<FormTodos>().value.map(
+                          (listTodo) => listTodo == _todo
+                              ? _todo.copyWith(done: value!)
+                              : listTodo,
+                        );
                 //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-                _bloc.add(
-                  NoteFormEvent.todosChanged(_formTodoProvider.value),
-                );
+                context.read<NoteFormBloc>().add(
+                      NoteFormEvent.todosChanged(
+                          context.read<FormTodos>().value),
+                    );
               },
             ),
             trailing: Column(
@@ -98,37 +98,45 @@ class TodoTile extends HookWidget {
               counterText: '',
               onChanged: (value) {
                 //mapping or replacing all value in the list, as the KtList us immutable
-                _formTodoProvider.value = _formTodoProvider.value.map(
-                  (listTodo) => listTodo == _todo
-                      ? _todo.copyWith(name: value)
-                      : listTodo,
-                );
+                context.read<FormTodos>().value =
+                    context.read<FormTodos>().value.map(
+                          (listTodo) => listTodo == _todo
+                              ? _todo.copyWith(name: value)
+                              : listTodo,
+                        );
                 //passing the _TodoItemPrimitive_ to the _NoteFormBLoc_ through the _NoteFormEvent.todosChanged(value)_
-                _bloc.add(
-                  NoteFormEvent.todosChanged(_formTodoProvider.value),
-                );
+                context.read<NoteFormBloc>().add(
+                      NoteFormEvent.todosChanged(
+                          context.read<FormTodos>().value),
+                    );
               },
-              validator: (_) => _bloc.state.note.todoList.value.fold(
-                //left ValueFailure of the whole list, not the individual list item
-                (leftFailure) => null,
-                //rightValue giving the _TodoListItem_ with the specified _[index]_
-                (todoList) => todoList[index].name.value.fold(
-                      //leftValueFailure of the _TodoItem[index]_
-                      (leftValueFailure) => leftValueFailure.maybeMap(
-                        core: (valueFailure) =>
-                            valueFailure.coreFailure.maybeMap(
-                          exceedingLength: (failure) =>
-                              'Exceeding Length, Max: ${failure.max}',
-                          empty: (_) => 'Empty Body',
-                          multiLine: (_) => 'Todos can\'t be multi-lined',
-                          orElse: () => null,
+              validator: (_) => context
+                  .read<NoteFormBloc>()
+                  .state
+                  .note
+                  .todoList
+                  .value
+                  .fold(
+                    //left ValueFailure of the whole list, not the individual list item
+                    (leftFailure) => null,
+                    //rightValue giving the _TodoListItem_ with the specified _[index]_
+                    (todoList) => todoList[index].name.value.fold(
+                          //leftValueFailure of the _TodoItem[index]_
+                          (leftValueFailure) => leftValueFailure.maybeMap(
+                            core: (valueFailure) =>
+                                valueFailure.coreFailure.maybeMap(
+                              exceedingLength: (failure) =>
+                                  'Exceeding Length, Max: ${failure.max}',
+                              empty: (_) => 'Empty Body',
+                              multiLine: (_) => 'Todos can\'t be multi-lined',
+                              orElse: () => null,
+                            ),
+                            orElse: () => null,
+                          ),
+                          //rightValue :: correct value, so need to do anything
+                          (_) => null,
                         ),
-                        orElse: () => null,
-                      ),
-                      //rightValue :: correct value, so need to do anything
-                      (_) => null,
-                    ),
-              ),
+                  ),
             ),
           ),
         ),
